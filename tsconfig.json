@@ -1,0 +1,35 @@
+{
+  // "compilerOptions" is a key that holds all the settings for how TypeScript will compile your code.
+  "compilerOptions": {
+
+    // "target" specifies the version of JavaScript the TypeScript code will be compiled into.
+    // "ES2024" means the output will be modern JavaScript, including features from the ECMAScript 2024 standard.
+    "target": "ES2024",
+
+    // "module" determines the module system for the generated JavaScript code.
+    // "commonjs" is a popular module system used by Node.js, so this tells the compiler to use that format.
+    "module": "commonjs",
+
+    // "strict" enables a wide range of strict type-checking options.
+    // Setting this to "true" helps catch potential errors early and improves code quality.
+    "strict": true, 
+
+    // "esModuleInterop" allows you to import modules with both `import * as` and `import default` syntax.
+    // It's a common and helpful setting for working with different module systems.
+    "esModuleInterop": true,
+  },
+
+  // "include" is an array that tells the compiler which files to include in the compilation.
+  // "src/**/*.ts" means it will look for all files ending with ".ts" inside the "src" directory
+  // and any of its subdirectories.
+  "include": [
+    "src/**/*.ts" 
+  ],
+
+  // "exclude" is an array that specifies which files or directories should be ignored by the compiler.
+  // "node_modules" is a common exclusion to prevent the compiler from processing
+  // all the third-party libraries installed in your project.
+  "exclude": [
+    "node_modules" 
+  ]
+}
