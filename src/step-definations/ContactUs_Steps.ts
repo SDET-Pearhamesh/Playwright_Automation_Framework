@@ -1,5 +1,6 @@
-import { When } from "@cucumber/cucumber"
+import { When, Then } from "@cucumber/cucumber"
 import { pageFixture } from "./hooks/browserContextFixture";
+import { expect } from "@playwright/test";
 
 
 When('I type a first name', async () => {
@@ -31,8 +32,25 @@ When('I type a comment', async () => {
 
 });
 
-// When('I click on the submit button', async () => {
-           
+When('I click on the submit button', async () => {
 
-// });
+    const submitButton = pageFixture.page.locator('input[value="SUBMIT"]');
+    await submitButton.click();      
+});
+
+
+Then('I should be presented with a successful contact us submission message', async () => {
+          
+    const messageText = await pageFixture.page.getByText('Thank You for your Message!').textContent();
+    expect(messageText).toEqual("Thank You for your Message!")
+
+});
+
+
+Then('I should be presented with a unsuccessful message', async () => {
+          
+    const errorMessage = await (await pageFixture.page.waitForSelector("body")).textContent()
+    expect(errorMessage).toMatch(/Error: (all fields are required|Invalid email address)/)
+
+});
 
