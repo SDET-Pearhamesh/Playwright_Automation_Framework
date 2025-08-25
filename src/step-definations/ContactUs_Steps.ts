@@ -85,14 +85,14 @@ Then('I should be presented with a unsuccessful message', async () => {
 // Random data - faker data
 
 When('I type a random first name', async () => {
-    
+
     const randomFirstName = faker.person.firstName();
     const firstName_textField = pageFixture.page.getByPlaceholder("First Name")
     await firstName_textField.fill(randomFirstName)
 });
 
 
-When('I type a random last name', async () =>  {
+When('I type a random last name', async () => {
     const randomLastName = faker.person.lastName();
     const lastName_textField = pageFixture.page.getByPlaceholder("Last Name")
     await lastName_textField.fill(randomLastName)
@@ -100,13 +100,62 @@ When('I type a random last name', async () =>  {
 });
 
 
-When('I enter a random email address', async () =>  {    
-    
+When('I enter a random email address', async () => {
+
     const randomEmail = faker.internet.email();
     const email_textField = pageFixture.page.getByPlaceholder("Email Address");
     await email_textField.fill(randomEmail);
-    
+
 });
+
+When('I type a first name {word} and a last name {word}', async (firstName: string , lastName: string) => {
+   
+    const firstName_textField = pageFixture.page.getByPlaceholder("First Name");
+    await firstName_textField.fill(firstName);
+
+    const lastName_textField = pageFixture.page.getByPlaceholder("Last Name");
+    await lastName_textField.fill(lastName);
+
+});
+
+
+When('I type a email address {string} and a comment {string}', async (email: string, comment: string) =>{
+    
+     const email_textField = pageFixture.page.getByPlaceholder("Email Address")
+     await email_textField.fill(email);
+
+     const comments_textField = pageFixture.page.getByPlaceholder("Comments")
+    await comments_textField.fill(comment);
+
+});
+
+Then('I should be presented with header text {string}', async (message: string) =>{
+   
+    // we will use or operator. 
+    await pageFixture.page.waitForSelector("//h1 | //body" , {state: 'visible'});
+
+    // get all elements
+    const elements = await pageFixture.page.locator("//h1 | //body").elementHandles();
+
+    let foundElementText = '';
+ 
+    //loop through each of the elements
+    for(let element of elements){
+
+        //get the inner text of the element
+        let text = await element.innerText();
+
+        // if statements
+
+        if(text.includes(message)){
+           foundElementText = text;
+           break;
+        }
+    }  
+    
+    expect(foundElementText).toContain(message);
+});
+
 
 
 
