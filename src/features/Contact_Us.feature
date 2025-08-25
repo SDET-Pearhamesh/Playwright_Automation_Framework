@@ -1,3 +1,4 @@
+@regression @contact-us 
 Feature: https://www.webdriveruniversity.com/ - Contact us page
 
     Background: Contact us page navigation
@@ -14,7 +15,7 @@ Feature: https://www.webdriveruniversity.com/ - Contact us page
         And I click on the submit button
         Then I should be presented with a successful contact us submission message
 
-
+    
     Scenario: Inalid contact us form submission
         And I type a first name
         And I type a last name
@@ -46,6 +47,7 @@ Feature: https://www.webdriveruniversity.com/ - Contact us page
     # Using Scenario outline - group commot steps
     # Add a blank line here before the Scenario outline starts.
 
+    @smoke
     Scenario Outline: Valid contact us form
         And I type a first name <firstName> and a last name <lastName>
         And I type a email address '<emailAddress>' and a comment '<comment>'
